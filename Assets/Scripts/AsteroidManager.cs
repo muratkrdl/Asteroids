@@ -11,6 +11,7 @@ public class AsteroidManager : MonoBehaviour
     [SerializeField] Vector2 spawnDelayRange;
     [SerializeField] Vector2 SpeedRange;
     [SerializeField] Vector2 scaleRange;
+    [SerializeField] Vector2 rotateRange;
 
     [SerializeField] MyPointManager spawnPoint;
     [SerializeField] MyPointManager targetPoint;
@@ -40,6 +41,8 @@ public class AsteroidManager : MonoBehaviour
 
                 var current = Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity, asteroidsParent);
                 current.transform.localScale = Vector3.one * Random.Range(scaleRange.x, scaleRange.y);
+
+                current.RotateSpeed = Random.Range(rotateRange.x,rotateRange.y);
 
                 var direction = targetPoint.GetPosition() - spawnPosition;
                 var speed = Random.Range(SpeedRange.x, SpeedRange.y);

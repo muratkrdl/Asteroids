@@ -22,6 +22,18 @@ public class PlayerController : MonoBehaviour
 
     BoxCollider2D boxCollider2D;
 
+    public float ShootDelay
+    {
+        get
+        {
+            return shootDelay;
+        }
+        set
+        {
+            shootDelay = value;
+        }
+    }
+
     void Awake() 
     {
         boxCollider2D = GetComponent<BoxCollider2D>();    
@@ -30,7 +42,7 @@ public class PlayerController : MonoBehaviour
     void Update() 
     {
         Move();
-        Shoot();  
+        Shoot();
     }
 
     void Move()
@@ -70,8 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Asteroid"))
         {
-            Time.timeScale = 0f;
-            Debug.Log("GAME OVER!!");
+            GameManager.Instance.ShowGameOver();
         }
         else if(other.gameObject.CompareTag("Border"))
         {

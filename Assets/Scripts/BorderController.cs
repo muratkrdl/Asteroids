@@ -18,11 +18,32 @@ public class BorderController : MonoBehaviour
         if(axis == Axis.X)
         {
             current.x *= -1;
-        } else
+        }
+        else
         {
             current.y *= -1;
         }
 
         other.transform.position = current;
+        StartCoroutine(EnterTeleport(other.gameObject));
     }
+
+    IEnumerator EnterTeleport(GameObject other)
+    {
+        DisableCollider(other);
+        yield return new WaitForSeconds(.5f);
+        EnableCollider(other);
+    }
+
+    void DisableCollider(GameObject other)
+    {
+        other.GetComponent<Collider2D>().enabled = false;
+    }
+
+    void EnableCollider(GameObject other)
+    {
+        if(other == null) { return; }
+        other.GetComponent<Collider2D>().enabled = true;
+    }
+
 }
